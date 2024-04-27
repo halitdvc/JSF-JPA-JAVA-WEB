@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<body>
+	<f:view>
+		<h:form>
+
+			<h:panelGrid columns="2">
+
+			UlkeKodu:<h:selectOneRadio value="#{musteriView.musteri.id.ulkeKodu}">
+					<f:selectItem itemLabel="TR" itemValue="TR" />
+					<f:selectItem itemLabel="Yabanci" itemValue="Yabanci" />
+				</h:selectOneRadio>
+			Musteri Adi = <h:inputText value="#{musteriView.musteri.ad}" />
+			Musteri Soyad = <h:inputText value="#{musteriView.musteri.soyad}" />
+			Musteri Yas = <h:inputText value="#{musteriView.musteri.yas}" />
+			Sehir = <h:inputText value="#{musteriView.musteri.sehir}" />
+			Cinsiyet:<h:selectOneRadio value="#{musteriView.musteri.cinsiyet}">
+					<f:selectItem itemLabel="Erkek" itemValue="Erkek" />
+					<f:selectItem itemLabel="Kadin" itemValue="Kadin" />
+				</h:selectOneRadio>
+			Otel = <h:inputText value="#{musteriView.musteri.otel}" />
+			Oda Tipi = <h:inputText value="#{musteriView.musteri.odaTipi}" />
+			
+					
+			Adres cadde:<h:inputText value="#{musteriView.musteri.adresBilgileri.cadde}" />
+			Adres sokak:<h:inputText
+					value="#{musteriView.musteri.adresBilgileri.sokak}" />
+
+
+
+				<h:commandButton action="#{musteriView.Kaydet()}" value="Kayit Et"
+					rendered="#{musteriView.musteri.ad == null}" />
+				<!--Musteri adi girilmemisse kayit et butonu aktif-->
+				<h:commandButton action="#{musteriView.Guncelle()}" value="Guncelle"
+					rendered="#{musteriView.musteri.ad!= null}" />
+				<!--Musteri adi girilmisse guncelle et butonu aktif-->
+
+
+
+			</h:panelGrid>
+
+			<h:dataTable value="#{musteriView.list}" var="isaretci">
+				<h:column>
+					<f:facet name="header">Sec</f:facet>
+					<h:commandLink value="Sec">
+						<f:setPropertyActionListener value="#{isaretci}"
+							target="#{musteriView.musteri}" />
+					</h:commandLink>
+				</h:column>
+				<h:column>
+					<f:facet name="header">Sil</f:facet>
+					<h:commandLink action="#{musteriView.Sil()}" value="Sil" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Musteri Adi</f:facet>
+					<h:outputText value="#{isaretci.ad}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Musteri Soyad</f:facet>
+					<h:outputText value="#{isaretci.soyad}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Musteri Yas</f:facet>
+					<h:outputText value="#{isaretci.yas}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Musteri Otel</f:facet>
+					<h:outputText value="#{isaretci.otel}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Musteri Oda Tipi</f:facet>
+					<h:outputText value="#{isaretci.odaTipi}" />
+				</h:column>
+				
+
+
+			</h:dataTable>
+
+
+		</h:form>
+	</f:view>
+
+</body>
+</html>
